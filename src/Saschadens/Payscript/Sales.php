@@ -10,24 +10,14 @@ use Saschadens\Payscript\Formatter as FormatterInterface;
 class Sales
 {
 
-    /**
-     * @param DateTime $dt
-     *
-     * @return bool
-     */
-    private function isSunday(DateTime $dt)
+    private function daysInWeekend(DateTime $dt)
     {
-        return $dt->format('N') == 7;
-    }
+        $daysLeft = 0;
+        if (($dt->format('N') - 5) > 0) {
+            $daysLeft = ($dt->format('N') - 5);
+        }
 
-    /**
-     * @param DateTime $dt
-     *
-     * @return bool
-     */
-    private function isWeekend(DateTime $dt)
-    {
-        return $dt->format('N') >= 6;
+        return $daysLeft;
     }
 
     public function getMonthlySalaryDate(DateTime $dt)
@@ -35,15 +25,9 @@ class Sales
         $dt->modify('last day of this month');
         $dt->setTime(0, 0, 0);
 
-        if ($this->isWeekend($dt)) {
-            $setFriday = 'Friday this week';
-
-            if ($this->isSunday($dt)) {
-                // Workaround for bug http://php.net/manual/en/datetime.formats.relative.php#108317
-                $setFriday = 'Friday previous week';
-            }
-
-            $dt->modify($setFriday);
+        if ($this->daysInWeekend($dt) != 0) {
+            $daysToSubstract = new DateInterval('P' . $this->daysInWeekend($dt) . 'D');
+            $dt->sub($daysToSubstract);
         }
 
         return $dt;
@@ -51,19 +35,20 @@ class Sales
 
     public function getMonthlyBonusDate(DateTime $dt)
     {
+        $interval = new DateInterval('P14D');
+
         $dt->modify('first day of this month');
         $dt->setTime(0, 0, 0);
-        $dt->add(new DateInterval('P14D'));
+        $dt->add($interval);
 
-        if ($this->isWeekend($dt)) {
-            $setWednesday = 'Wednesday next week';
+        if ($this->daysInWeekend($dt) != 0) {
+            $daysTillWednesday = 3;
 
-            if ($this->isSunday($dt)) {
-                // Workaround for bug http://php.net/manual/en/datetime.formats.relative.php#108317
-                $setWednesday = 'Wednesday this week';
+            if ($this->daysInWeekend($dt) == 1) {
+                $daysTillWednesday += 1;
             }
-
-            $dt->modify($setWednesday);
+            $dayInterval = new DateInterval('P' . $daysTillWednesday . 'D');
+            $dt->add($dayInterval);
         }
 
         return $dt;

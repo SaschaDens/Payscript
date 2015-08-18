@@ -21,31 +21,12 @@ class SalesSpec extends ObjectBehavior
         $this->getMonthlySalaryDate($datetime)->shouldReturnAnInstanceOf('DateTime');
     }
 
-    function it_translates_Mar_2015_datatime_to_salary_payday_31_Mar_2015_datetime()
-    {
-        $currentDate = $this->getDatetime(2015, 3, 1);
-        $expectedDate = $this->getDatetime(2015, 3, 31);
-
-        $this->getMonthlySalaryDate($currentDate)->shouldBeLike($expectedDate);
-    }
-
-    function it_translates_Apr_2015_datatime_to_salary_payday_30_Apr_2015_datetime()
-    {
-        $currentDate = $this->getDatetime(2015, 4, 1);
-        $expectedDate = $this->getDatetime(2015, 4, 30);
-
-        $this->getMonthlySalaryDate($currentDate)->shouldBeLike($expectedDate);
-    }
-
     /**
      * Exceptions: unless that day is a Saturday or a Sunday.
      */
     function it_translates_Jan_2015_datatime_to_salary_payday_30_Jan_2015_datetime()
     {
-        $currentDate = $this->getDatetime(2015, 1, 1);
-        $expectedDate = $this->getDatetime(2015, 1, 30);
-
-        $this->getMonthlySalaryDate($currentDate)->shouldBeLike($expectedDate);
+        $this->checkMonthSalaryDate(2015, 1, 30);
     }
 
     /**
@@ -53,10 +34,18 @@ class SalesSpec extends ObjectBehavior
      */
     function it_translates_Feb_2015_datatime_to_salary_payday_27_Feb_2015_datetime()
     {
-        $currentDate = $this->getDatetime(2015, 2, 1);
-        $expectedDate = $this->getDatetime(2015, 2, 27);
+        $this->checkMonthSalaryDate(2015, 2, 27);
+    }
 
-        $this->getMonthlySalaryDate($currentDate)->shouldBeLike($expectedDate);
+
+    function it_translates_Mar_2015_datatime_to_salary_payday_31_Mar_2015_datetime()
+    {
+        $this->checkMonthSalaryDate(2015, 3, 31);
+    }
+
+    function it_translates_Apr_2015_datatime_to_salary_payday_30_Apr_2015_datetime()
+    {
+        $this->checkMonthSalaryDate(2015, 4, 30);
     }
 
     /**
@@ -64,26 +53,47 @@ class SalesSpec extends ObjectBehavior
      */
     function it_translates_May_2015_datatime_to_salary_payday_29_May_2015_datetime()
     {
-        $currentDate = $this->getDatetime(2015, 5, 1);
-        $expectedDate = $this->getDatetime(2015, 5, 29);
+        $this->checkMonthSalaryDate(2015, 5, 29);
+    }
 
-        $this->getMonthlySalaryDate($currentDate)->shouldBeLike($expectedDate);
+    function it_translates_Jun_2015_datatime_to_salary_payday_30_Jun_2015_datetime()
+    {
+        $this->checkMonthSalaryDate(2015, 6, 30);
+    }
+
+    function it_translates_Jul_2015_datatime_to_salary_payday_31_Jul_2015_datetime()
+    {
+        $this->checkMonthSalaryDate(2015, 7, 31);
+    }
+
+    function it_translates_Aug_2015_datatime_to_salary_payday_31_Aug_2015_datetime()
+    {
+        $this->checkMonthSalaryDate(2015, 8, 31);
+    }
+
+    function it_translates_Sep_2015_datatime_to_salary_payday_30_Sep_2015_datetime()
+    {
+        $this->checkMonthSalaryDate(2015, 9, 30);
+    }
+
+    function it_translates_Oct_2015_datatime_to_salary_payday_30_Oct_2015_datetime()
+    {
+        $this->checkMonthSalaryDate(2015, 10, 30);
+    }
+
+    function it_translates_Nov_2015_datatime_to_salary_payday_30_Nov_2015_datetime()
+    {
+        $this->checkMonthSalaryDate(2015, 11, 30);
+    }
+
+    function it_translates_Dec_2015_datatime_to_salary_payday_31_Dec_2015_datetime()
+    {
+        $this->checkMonthSalaryDate(2015, 12, 31);
     }
 
     function it_translates_Jan_2015_datatime_to_salary_bonusday_15_Jan_2015_datetime()
     {
-        $currentDate = $this->getDatetime(2015, 1, 1);
-        $expectedDate = $this->getDatetime(2015, 1, 15);
-
-        $this->getMonthlyBonusDate($currentDate)->shouldBeLike($expectedDate);
-    }
-
-    function it_translates_May_2015_datatime_to_salary_bonusday_15_May_2015_datetime()
-    {
-        $currentDate = $this->getDatetime(2015, 5, 1);
-        $expectedDate = $this->getDatetime(2015, 5, 15);
-
-        $this->getMonthlyBonusDate($currentDate)->shouldBeLike($expectedDate);
+        $this->checkMonthBonusDate(2015, 1, 15);
     }
 
     /**
@@ -92,10 +102,47 @@ class SalesSpec extends ObjectBehavior
      */
     function it_translates_Feb_2015_datatime_to_salary_bonusday_18_Feb_2015_datetime()
     {
-        $currentDate = $this->getDatetime(2015, 2, 1);
-        $expectedDate = $this->getDatetime(2015, 2, 18);
+        $this->checkMonthBonusDate(2015, 2, 18);
+    }
 
-        $this->getMonthlyBonusDate($currentDate)->shouldBeLike($expectedDate);
+    function it_translates_Mar_2015_datatime_to_salary_bonusday_18_Mar_2015_datetime()
+    {
+        $this->checkMonthBonusDate(2015, 3, 18);
+    }
+
+    function it_translates_Apr_2015_datatime_to_salary_bonusday_15_Apr_2015_datetime()
+    {
+        $this->checkMonthBonusDate(2015, 4, 15);
+    }
+
+    function it_translates_May_2015_datatime_to_salary_bonusday_15_May_2015_datetime()
+    {
+        $this->checkMonthBonusDate(2015, 5, 15);
+    }
+
+    function it_translates_Jun_2015_datatime_to_salary_bonusday_15_Jun_2015_datetime()
+    {
+        $this->checkMonthBonusDate(2015, 6, 15);
+    }
+
+    function it_translates_Jul_2015_datatime_to_salary_bonusday_15_Jul_2015_datetime()
+    {
+        $this->checkMonthBonusDate(2015, 7, 15);
+    }
+
+    function it_translates_Aug_2015_datatime_to_salary_bonusday_19_Aug_2015_datetime()
+    {
+        $this->checkMonthBonusDate(2015, 8, 19);
+    }
+
+    function it_translates_Sep_2015_datatime_to_salary_bonusday_15_Sep_2015_datetime()
+    {
+        $this->checkMonthBonusDate(2015, 9, 15);
+    }
+
+    function it_translates_Oct_2015_datatime_to_salary_bonusday_15_Oct_2015_datetime()
+    {
+        $this->checkMonthBonusDate(2015, 10, 15);
     }
 
     /**
@@ -104,10 +151,12 @@ class SalesSpec extends ObjectBehavior
      */
     function it_translates_Nov_2015_datatime_to_salary_bonusday_18_Nov_2015_datetime()
     {
-        $currentDate = $this->getDatetime(2015, 11, 1);
-        $expectedDate = $this->getDatetime(2015, 11, 18);
+        $this->checkMonthBonusDate(2015, 11, 18);
+    }
 
-        $this->getMonthlyBonusDate($currentDate)->shouldBeLike($expectedDate);
+    function it_translates_Dec_2015_datatime_to_salary_bonusday_15_Dec_2015_datetime()
+    {
+        $this->checkMonthBonusDate(2015, 12, 15);
     }
 
     function it_calculates_remaining_6_months_salary_to_paydate_collection()
@@ -122,5 +171,21 @@ class SalesSpec extends ObjectBehavior
         $dt->setTime(0, 0, 0);
 
         return $dt;
+    }
+
+    private function checkMonthSalaryDate($year, $month, $day)
+    {
+        $currentDate = $this->getDatetime($year, $month, 1);
+        $expectedDate = $this->getDatetime($year, $month, $day);
+
+        $this->getMonthlySalaryDate($currentDate)->shouldBeLike($expectedDate);
+    }
+
+    private function checkMonthBonusDate($year, $month, $day)
+    {
+        $currentDate = $this->getDatetime($year, $month, 1);
+        $expectedDate = $this->getDatetime($year, $month, $day);
+
+        $this->getMonthlyBonusDate($currentDate)->shouldBeLike($expectedDate);
     }
 }

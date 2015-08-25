@@ -1,0 +1,20 @@
+{
+    "name": "saschadens/payscript",
+    "authors": [
+        {
+            "name": "Sascha Dens",
+            "email": "sascha.dens@telenet.be"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^2.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Saschadens\\": "src/Saschadens/"
+        }
+    }
+}

@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "gulp": "^3.8.7",
+    "gulp-phpspec": "^0.2.5",
+    "gulp-run": "^1.6.4"
+  },
+  "dependencies": {
+    "gulp-plumber": "^1.0.1"
+  }
+}

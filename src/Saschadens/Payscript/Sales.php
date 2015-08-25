@@ -36,12 +36,14 @@ class Sales
         $dt->setTime(0, 0, 0);
 
         if ($this->isWeekend($dt)) {
+            $setFriday = 'Friday this week';
+
             if ($this->isSunday($dt)) {
                 // Workaround for bug http://php.net/manual/en/datetime.formats.relative.php#108317
-                $dt->modify('Friday previous week');
-            } else {
-                $dt->modify('Friday this week');
+                $setFriday = 'Friday previous week';
             }
+
+            $dt->modify($setFriday);
         }
 
         return $dt;
@@ -54,12 +56,14 @@ class Sales
         $dt->add(new DateInterval('P14D'));
 
         if ($this->isWeekend($dt)) {
+            $setWednesday = 'Wednesday next week';
+
             if ($this->isSunday($dt)) {
                 // Workaround for bug http://php.net/manual/en/datetime.formats.relative.php#108317
-                $dt->modify('Wednesday this week');
-            } else {
-                $dt->modify('Wednesday next week');
+                $setWednesday = 'Wednesday this week';
             }
+
+            $dt->modify($setWednesday);
         }
 
         return $dt;

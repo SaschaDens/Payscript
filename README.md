@@ -1,5 +1,6 @@
 # Payscript Kata
 [![Build Status](https://travis-ci.org/SaschaDens/payscript.svg?branch=master)](https://travis-ci.org/SaschaDens/payscript)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/SaschaDens/payscript/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/SaschaDens/payscript/?branch=master)
 
 This company is handling their sales payroll in the following way: Sales staff get a regular monthly fixed base salary
 and a monthly bonus. The base salaries are paid on the last day of the month unless that day is a Saturday or a Sunday (weekend).

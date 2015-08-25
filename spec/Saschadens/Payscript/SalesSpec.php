@@ -4,7 +4,6 @@ namespace spec\Saschadens\Payscript;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Saschadens\Payscript\Collection\PayDate as PayDateCollection;
 use DateTime;
 use Saschadens\Payscript\Formatter;
 
@@ -113,7 +112,7 @@ class SalesSpec extends ObjectBehavior
 
     function it_calculates_remaining_6_months_salary_to_paydate_collection()
     {
-        $this->getPayDateCollectionRemainingMonths(6)->shouldReturnAnInstanceOf(PayDateCollection::class);
+        $this->getPayDateCollectionRemainingMonths(6)->shouldReturnAnInstanceOf('Saschadens\Payscript\Collection\PayDate');
     }
 
     private function getDatetime($year, $month, $day)
